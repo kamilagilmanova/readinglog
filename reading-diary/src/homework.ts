@@ -12,36 +12,31 @@ type City = {
 };
 
 const cities: City[] = [
-    {
-        name: "Москва",
-        population: 13000000,
-        isCapital: true
-    },
-    {
-        name: "Санкт-Петербург",
-        population:  5652922,
-        isCapital: false
-    },
-    {
-        name: "Казань",
-        population: 1329825,
-        isCapital: false
-    }
-
-]
+  {
+    name: "Москва",
+    population: 13000000,
+    isCapital: true,
+  },
+  {
+    name: "Санкт-Петербург",
+    population: 5652922,
+    isCapital: false,
+  },
+  {
+    name: "Казань",
+    population: 1329825,
+    isCapital: false,
+  },
+];
 
 console.log("весь массив:", cities);
 console.log("название первого города:", cities[0].name);
 console.log("численность населения второго города:", cities[1].population);
 
-
-function calculateTotal(
-  price: number,
-  quantity: number
-): number {
+function calculateTotal(price: number, quantity: number): number {
   return price * quantity;
 }
 
 const total: number = calculateTotal(750, 4);
 
-console.log("Общая стоимость:", total)
+console.log("Общая стоимость:", total);

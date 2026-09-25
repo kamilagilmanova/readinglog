@@ -1,7 +1,7 @@
 import { books } from "./data/books";
-import { getReadBooks } from "./utils/getReadBooks";
+import { getBookByStatus } from "./utils/getBookByStatus";
 
-const readBooks = getReadBooks(books)
+const readBooks = getBookByStatus(books, "done")
 
 console.log("Все книги:", books)
 console.log("Прочитанные книги:", readBooks)
