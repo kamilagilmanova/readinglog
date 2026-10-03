@@ -75,6 +75,40 @@ const statusText = {
   done: "Прочитано",
 };
 
+const DeleteButton = styled.button`
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  font-size: 18px;
+  background-color: #fffaf4;
+  border: 1px solid #ded6cc;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f3e9dd;
+  }
+
+  &:active {
+    background-color: #e8d8c6;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #8b735f;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
 export default function BookCard({ book }: BookCardProps) {
   const rating = book.rating || 0;
   const stars = "★".repeat(rating);
@@ -105,6 +139,9 @@ export default function BookCard({ book }: BookCardProps) {
           <Info>Оценка будет доступна после прочтения</Info>
         )}
       </div>
+      <DeleteButton type="button" aria-label="Удалить книгу">
+        🗑
+      </DeleteButton>
     </Card>
   );
 }
