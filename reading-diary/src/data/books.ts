@@ -22,7 +22,7 @@ export const books: Book[] = [
     {
         id: 3,
         title: "Тучи",
-        author: ".",
+        author: "Михаил Лермонтов",
         pages: 5,
         status: "want",
         rating: 4,
