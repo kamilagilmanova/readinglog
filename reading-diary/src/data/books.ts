@@ -1,6 +1,6 @@
 import type { Book } from "../types/book";
 
-export const books: Book[] = [
+const books: Book[] = [
     {
         id:1,
         title:"1984",
@@ -29,3 +29,5 @@ export const books: Book[] = [
         note: "Прикольно"
     }
 ];
+
+export default books

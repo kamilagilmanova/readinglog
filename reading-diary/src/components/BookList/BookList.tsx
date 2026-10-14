@@ -5,6 +5,7 @@ import styled from "@emotion/styled";
 
 interface BookListProps {
   books: Book[];
+  deleteBook: (id: number) => void;
 }
 
 const Section = styled.section`
@@ -30,16 +31,22 @@ const List = styled.div`
   gap: 12px;
 `;
 
-export default function BookList({ books }: BookListProps) {
+const EmptyText = styled.p`
+  margin: 0;
+  font-size: 18px;
+  color: #756f68;
+`
+
+export default function BookList({ books, deleteBook }: BookListProps) {
   return (
     <Section>
       <Title>Мои книги</Title>
       {books.length === 0 ? (
-        <p className="book-list__empty">Книг пока нет</p>
+        <EmptyText>Книг пока нет</EmptyText>
       ) : (
         <List>
           {books.map((book) => (
-            <BookCard key={book.id} book={book} />
+            <BookCard key={book.id} book={book} deleteBook={deleteBook} />
           ))}
         </List>
       )}
