@@ -6,6 +6,8 @@ import "./App.css";
 import styled from "@emotion/styled";
 import Stats from "./components/Stats/Stats";
 import { TaskStateDemo } from "./practice/TaskStateDemo";
+import { BookForm } from "./components/BookForm/BookForm";
+import { EventFormDemo } from "./components/EventFormDemo/EventFormDemo";
 // import ButtonDemo from "./practice/StyledButtonDemo";
 
 const Page = styled.div`
@@ -30,7 +32,9 @@ function App() {
       <Container>
         <Stats books={books} />
         <BookList books={books} deleteBook={deleteBook} />
+        <BookForm/>
         <TaskStateDemo/>
+        <EventFormDemo />
       </Container>
     </Page>
     
