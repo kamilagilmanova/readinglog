@@ -1,5 +1,6 @@
 import { type Book, type BookStatus } from "../../types/book";
 import styled from "@emotion/styled";
+import { TrashIcon } from "../../icons/icons";
 
 interface BookCardProps {
   book: Book;
@@ -206,7 +207,7 @@ export default function BookCard({ book, deleteBook }: BookCardProps) {
         )}
       </div>
       <DeleteButton onClick={() => deleteBook(book.id)} type="button">
-        🗑️
+       <TrashIcon/>
       </DeleteButton>
     </Card>
   );
