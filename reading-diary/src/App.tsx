@@ -74,11 +74,6 @@ const BookFormColumn = styled.div`
   min-width: 0;
 `;
 
-const Container = styled.div`
-  max-width: 1320px;
-  margin: 0 auto;
-`;
-
 function App() {
   const [books, setBooks] = useState<Book[]>(initialBooks);
 
