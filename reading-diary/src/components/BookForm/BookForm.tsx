@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
-import { type BookStatus } from "../../types/book";
+import { type BookStatus, type Book } from "../../types/book";
+import { type SubmitEvent } from "react";
+
+interface BookFormProps {
+  addBook: (book: Omit<Book, "id">) => void;
+}
 
 const Form = styled.form`
   padding: 28px;
@@ -74,7 +79,44 @@ const Textarea = styled.textarea`
   }
 `;
 
-export function BookForm() {
+const Hint = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 4px 0 30px;
+  padding: 18px;
+  border-radius: 12px;
+  background-color: #f3eee8;
+  color: #4f4943;
+  font-size: 16px;
+  line-height: 1.55;
+`;
+
+const Error = styled.p`
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #fee2e2;
+  color: #b91c1c;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: 12px;
+  background-color: #242424;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(36, 36, 36, 0.18);
+
+  &:hover {
+    background-color: #111111;
+  }
+`;
+
+export function BookForm({ addBook }: BookFormProps) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [note, setNote] = useState("");
@@ -82,17 +124,37 @@ export function BookForm() {
   const [rating, setRating] = useState(5);
   const [status, setStatus] = useState<BookStatus>("want");
 
-  console.log({
-    title,
-    author,
-    status,
-    note,
-    rating,
-  });
-  return (
-    <Form>
-      <Title>Добавить книгу</Title>
+  const [error, setError] = useState("");
 
+  const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!title.trim() || !author.trim()) {
+      setError("Заполните название книги и автора.");
+      return;
+    }
+
+    addBook({
+      title,
+      author,
+      status,
+      rating: status === "done" ? rating : undefined,
+      note: status === "done" ? note : undefined,
+      pages: 110,
+    });
+
+    setTitle("");
+    setAuthor("");
+    setRating(5);
+    setNote("");
+    setStatus("want");
+    setError("");
+  };
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Title>Добавить книгу</Title>
+      {error && <Error>{error}</Error>}
       <Field>
         Название книги
         <Input
@@ -128,31 +190,42 @@ export function BookForm() {
           <option value="done">Прочитано</option>
         </Select>
       </Field>
-      <Field>
-        Оценка
-        <Select
-          value={rating}
-          onChange={(event) => {
-            setRating(Number(event.target.value));
-          }}
-        >
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-        </Select>
-      </Field>
-      <Field>
-        Заметка
-        <Textarea
-          value={note}
-          placeholder="Добавьте короткую заметку"
-          onChange={(event) => {
-            setNote(event.target.value);
-          }}
-        />
-      </Field>
+
+      {status === "done" ? (
+        <>
+          <Field>
+            Оценка
+            <Select
+              value={rating}
+              onChange={(event) => {
+                setRating(Number(event.target.value));
+              }}
+            >
+              <option value={1}>1</option>
+              <option value={2}>2</option>
+              <option value={3}>3</option>
+              <option value={4}>4</option>
+              <option value={5}>5</option>
+            </Select>
+          </Field>
+          <Field>
+            Заметка
+            <Textarea
+              value={note}
+              placeholder="Добавьте короткую заметку"
+              onChange={(event) => {
+                setNote(event.target.value);
+              }}
+            />
+          </Field>
+        </>
+      ) : (
+        <Hint>
+          Поля оценки и заметки появятся, если вы выберете статус "Прочитано".
+        </Hint>
+      )}
+
+      <Button type="submit">Добавить книгу</Button>
     </Form>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {type Book} from "./types/book"
+import { type Book } from "./types/book";
 import initialBooks from "./data/books";
 import BookList from "./components/BookList/BookList";
 import "./App.css";
@@ -22,22 +22,30 @@ const Container = styled.div`
 `;
 
 function App() {
-  const [books, setBooks] = useState<Book[]>(initialBooks)
+  const [books, setBooks] = useState<Book[]>(initialBooks);
 
   const deleteBook = (id: number) => {
-    setBooks ((currentBooks) => currentBooks.filter((book) => book.id !== id));
-  }
+    setBooks((currentBooks) => currentBooks.filter((book) => book.id !== id));
+  };
+  const addBook = (book: Omit<Book, "id">) => {
+    const newBook: Book = {
+      id: Date.now(),
+      ...book,
+    };
+
+    setBooks((currentBooks) => [...currentBooks, newBook]);
+  };
+
   return (
     <Page>
       <Container>
         <Stats books={books} />
-        <BookList books={books} deleteBook={deleteBook} />
-        <BookForm/>
-        <TaskStateDemo/>
+        <BookList books={books} deleteBook={deleteBook}/>
+        <BookForm addBook={addBook}/>
+        <TaskStateDemo />
         <EventFormDemo />
       </Container>
     </Page>
-    
   );
 }
 
