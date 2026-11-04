@@ -8,9 +8,6 @@ import Stats from "./components/Stats/Stats";
 import { BookForm } from "./components/BookForm/BookForm";
 import bookLogo from "./assets/img/book-logo.png";
 
-// import { EventFormDemo } from "./components/EventFormDemo/EventFormDemo";
-// import { TaskStateDemo } from "./practice/TaskStateDemo";
-
 const Page = styled.div`
   min-height: 100vh;
   padding: 20px 48px;
