@@ -1,4 +1,4 @@
-import { books } from "./data/books";
+import books from "./data/books";
 import { getBookByStatus } from "./utils/getBookByStatus";
 
 const readBooks = getBookByStatus(books, "done")
